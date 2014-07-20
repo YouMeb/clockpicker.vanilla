@@ -1,5 +1,6 @@
 {
   "name": "clockpicker.vanilla",
+  "version": "0.0.1",
   "repo": "YouMeb/clockpicker.vanilla",
   "scripts": [
     "lib/index.js",
