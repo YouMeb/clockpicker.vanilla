@@ -1,6 +1,7 @@
 .clockpicker-clock {
 	position: relative;
 	user-select: none;
+	overflow: hidden;
 }
 
 .clockpicker-clock-center {
@@ -57,12 +58,14 @@
 /* Pop */
 
 .clockpicker-pop {
+	font-size: 12px;
 	display: none;
 	position: absolute;
 	width: 200px;
 	background: #fff;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 	padding-bottom: 4em;
+	border: 1px #eee solid;
 }
 
 .clockpicker-pop.display {

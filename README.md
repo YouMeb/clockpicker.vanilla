@@ -5,6 +5,11 @@ A vanilla of [weareoutman/clockpicker](https://github.com/weareoutman/clockpicke
 
 ![screenshot](./screenshot.png)
 
+## Brower Support
+
+* lte IE 10 - Need SVGElement classList polyfill
+* lte IE 9 - Need Element classList polyfill
+
 ## License
 
 (The MIT License)

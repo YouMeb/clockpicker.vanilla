@@ -1181,12 +1181,11 @@ function updateHand(hand, dial, n) {
 }
 
 function getPointFromMouseEvent(e) {
-  var bodyRect = document.body.getBoundingClientRect();
   var rect = this.el.getBoundingClientRect();
 
   var offset = {
-    top: rect.top - bodyRect.top,
-    left: rect.left - bodyRect.left
+    top: rect.top,
+    left: rect.left
   };
 
   var helfSize = this.options.size / 2;
