@@ -5,7 +5,7 @@ A vanilla version of [weareoutman/clockpicker](https://github.com/weareoutman/cl
 
 ![screenshot](https://raw.githubusercontent.com/YouMeb/clockpicker.vanilla/master/screenshot.png)
 
-## Brower Support
+## Browser Support
 
 * lte IE 10 - Need SVGElement classList polyfill
 * lte IE 9 - Need Element classList polyfill
