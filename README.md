@@ -3,7 +3,7 @@ clockpicker.vanilla
 
 A vanilla of [weareoutman/clockpicker](https://github.com/weareoutman/clockpicker)
 
-![screenshot](./screenshot.png)
+![screenshot](https://raw.githubusercontent.com/YouMeb/clockpicker.vanilla/master/screenshot.png)
 
 ## License
 
