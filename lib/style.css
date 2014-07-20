@@ -1,0 +1,129 @@
+.clockpicker-clock {
+	position: relative;
+	user-select: none;
+}
+
+.clockpicker-clock-center {
+	fill: #0095dd;
+}
+
+/* Dial */
+
+.clockpicker-dial {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+}
+
+.clockpicker-dial.display {
+	display: block;
+}
+
+.clockpicker-dial.prepare {
+	opacity: 0;
+	transform: scale(1.2);
+	transition: all .4s;
+}
+
+.clockpicker-dial.hide-prepare {
+	opacity: 0;
+	transform: scale(.6);
+	transition: all 1s;
+}
+
+.clockpicker-dial.transition {
+	transform: scale(1);
+	opacity: 1;
+}
+
+/* Tick */
+
+.clockpicker-tick {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 2em;
+	height: 2em;
+	margin-top: -1em;
+	margin-left: -1em;
+	text-align: center;
+	line-height: 2em;
+}
+
+/* Pop */
+
+.clockpicker-pop {
+	display: none;
+	position: absolute;
+	width: 200px;
+	background: #fff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+	padding-bottom: 4em;
+}
+
+.clockpicker-pop.display {
+	display: block;
+}
+
+.clockpicker-pop.prepare {
+	opacity: 0;
+	transform: scale(.8);
+	transition: all .4s;
+}
+
+.clockpicker-pop.hide-prepare {
+	opacity: 0;
+	transform: scale(1.2);
+	transition: all .4s;
+}
+
+.clockpicker-pop.transition {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.clockpicker-pop button {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 4em;
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	border: none;
+	border-top: 1px #eee solid;
+	outline: none;
+	cursor: pointer;
+	line-height: 4em;
+	text-align: center;
+}
+
+.clockpicker-pop button:hover {
+	color: #0095dd;
+}
+
+/* Hand */
+
+.clockpicker-hand {
+	stroke: #0095dd;	
+	stroke-width: 1;
+	stroke-linecap: round;
+	opacity: .5;
+}
+
+.clockpicker-hand.active {
+	opacity: 1;
+}
+
+.clockpicker-hand.hour {
+	stroke-width: 3;
+}
+
+.clockpicker-hand.minute {
+	stroke-width: 2;
+}

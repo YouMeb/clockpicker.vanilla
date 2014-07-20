@@ -1,0 +1,25 @@
+{
+  "name": "clockpicker.vanilla",
+  "repo": "YouMeb/clockpicker.vanilla",
+  "scripts": [
+    "lib/index.js",
+    "lib/create-svg-element.js",
+    "lib/default-options.js",
+    "lib/dial.js",
+    "lib/hand.js",
+    "lib/point.js",
+    "lib/pop.js",
+    "lib/tick.js",
+    "lib/clock.js",
+    "lib/animate.js"
+  ],
+  "styles": [
+    "lib/style.css"
+  ],
+  "dependencies": {
+    "component/emitter": "^1.1.3",
+    "poying/inline-style": "~0.0.4",
+    "poying/inline-style-auto-prefix": "~0.0.0",
+    "poying/transition-duration": "*"
+  }
+}
