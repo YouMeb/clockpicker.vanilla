@@ -1,7 +1,7 @@
 clockpicker.vanilla
 ===================
 
-A vanilla of [weareoutman/clockpicker](https://github.com/weareoutman/clockpicker)
+A vanilla version of [weareoutman/clockpicker](https://github.com/weareoutman/clockpicker).
 
 ![screenshot](https://raw.githubusercontent.com/YouMeb/clockpicker.vanilla/master/screenshot.png)
 
