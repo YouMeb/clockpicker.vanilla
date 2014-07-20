@@ -1,6 +1,3 @@
-
-;(function(){
-
 /**
  * Require the module at `name`.
  *
@@ -433,13 +430,13 @@ module.exports = function (el, detail) {
 
 });
 
-require.register("clockpicker.vanilla", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var defaultOptions = require("clockpicker.vanilla/lib/default-options.js");
-var Clock = require("clockpicker.vanilla/lib/clock.js");
-var Pop = require("clockpicker.vanilla/lib/pop.js");
+var defaultOptions = require("youmeb~clockpicker.vanilla@0.0.2/lib/default-options.js");
+var Clock = require("youmeb~clockpicker.vanilla@0.0.2/lib/clock.js");
+var Pop = require("youmeb~clockpicker.vanilla@0.0.2/lib/pop.js");
 
 module.exports = Clockpicker;
 
@@ -561,7 +558,7 @@ function updateClock() {
 
 });
 
-require.register("clockpicker.vanilla/lib/create-svg-element.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/create-svg-element.js", function (exports, module) {
 'use strict';
 
 module.exports = function (tag) {
@@ -570,7 +567,7 @@ module.exports = function (tag) {
 
 });
 
-require.register("clockpicker.vanilla/lib/default-options.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/default-options.js", function (exports, module) {
 'use strict';
 
 var defaultOptions = {
@@ -598,12 +595,12 @@ module.exports = function (options) {
 
 });
 
-require.register("clockpicker.vanilla/lib/dial.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/dial.js", function (exports, module) {
 'use strict';
 
-var Point = require("clockpicker.vanilla/lib/point.js");
-var Tick = require("clockpicker.vanilla/lib/tick.js");
-var animate = require("clockpicker.vanilla/lib/animate.js");
+var Point = require("youmeb~clockpicker.vanilla@0.0.2/lib/point.js");
+var Tick = require("youmeb~clockpicker.vanilla@0.0.2/lib/tick.js");
+var animate = require("youmeb~clockpicker.vanilla@0.0.2/lib/animate.js");
 
 module.exports = Dial;
 
@@ -702,11 +699,11 @@ Dial.prototype.moveTo = function (tick, emit) {
 
 });
 
-require.register("clockpicker.vanilla/lib/hand.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/hand.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var createSvgElement = require("clockpicker.vanilla/lib/create-svg-element.js");
+var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.2/lib/create-svg-element.js");
 
 module.exports = Hand;
 
@@ -765,7 +762,7 @@ function setPoint(n, point) {
 
 });
 
-require.register("clockpicker.vanilla/lib/point.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/point.js", function (exports, module) {
 'use strict';
 
 module.exports = Point;
@@ -807,11 +804,11 @@ Point.prototype.distToSegmentSquared = function (p1, p2) {
 
 });
 
-require.register("clockpicker.vanilla/lib/pop.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/pop.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var animate = require("clockpicker.vanilla/lib/animate.js");
+var animate = require("youmeb~clockpicker.vanilla@0.0.2/lib/animate.js");
 
 module.exports = Pop;
 
@@ -852,7 +849,7 @@ function stop(e) {
 
 });
 
-require.register("clockpicker.vanilla/lib/tick.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/tick.js", function (exports, module) {
 'use strict';
 
 var inlineStyle = require("poying~inline-style@0.0.4");
@@ -899,16 +896,16 @@ Tick.prototype.size = function () {
 
 });
 
-require.register("clockpicker.vanilla/lib/clock.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/clock.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
 var inlineStyle = require("poying~inline-style@0.0.4");
 var autoprefix = require("poying~inline-style-auto-prefix@v0.0.0");
-var createSvgElement = require("clockpicker.vanilla/lib/create-svg-element.js");
-var Dial = require("clockpicker.vanilla/lib/dial.js");
-var Hand = require("clockpicker.vanilla/lib/hand.js");
-var Point = require("clockpicker.vanilla/lib/point.js");
+var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.2/lib/create-svg-element.js");
+var Dial = require("youmeb~clockpicker.vanilla@0.0.2/lib/dial.js");
+var Hand = require("youmeb~clockpicker.vanilla@0.0.2/lib/hand.js");
+var Point = require("youmeb~clockpicker.vanilla@0.0.2/lib/point.js");
 
 module.exports = Clock;
 
@@ -1200,7 +1197,7 @@ function getPointFromMouseEvent(e) {
 
 });
 
-require.register("clockpicker.vanilla/lib/animate.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.2/lib/animate.js", function (exports, module) {
 'use strict';
 
 var duration = require("poying~transition-duration@master");
@@ -1270,11 +1267,19 @@ Animate.prototype.clear = function (cb) {
 
 });
 
-if (typeof exports == "object") {
-  module.exports = require("clockpicker.vanilla");
-} else if (typeof define == "function" && define.amd) {
-  define([], function(){ return require("clockpicker.vanilla"); });
-} else {
-  this["clockpicker"] = require("clockpicker.vanilla");
-}
-})()
+require.register("clockpicker.vanilla.demo", function (exports, module) {
+'use strict';
+
+var container = document.querySelector('.page-main');
+var Clockpicker = require("youmeb~clockpicker.vanilla@0.0.2");
+var picker = new Clockpicker();
+
+picker.el.classList.add('picker');
+container.appendChild(picker.el);
+
+picker.init();
+picker.el.focus();
+
+});
+
+require("clockpicker.vanilla.demo")

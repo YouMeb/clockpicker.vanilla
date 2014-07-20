@@ -1,0 +1,72 @@
+html {
+	font-size: 10px;
+}
+
+body {
+	background: #fffbf5;
+	color: #513e26;
+	font-family: 'Lato', sans-serif;
+	font-size: 1.4rem;
+}
+
+input {
+	color: #513e26;
+	font-family: 'Lato', sans-serif;
+	font-size: 1.4rem;
+}
+
+.page-header {
+	position: relative;
+	text-align: center;
+	margin-top: 72px;
+	padding-bottom: 1.2em;
+}
+
+.page-header:before,
+.page-header:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	margin-left: -110px;
+	width: 220px;
+	height: 0;
+	border-bottom: 1px #513e26 solid;
+	opacity: .3;
+}
+
+.page-header:before {
+	bottom: 2px;
+}
+
+.page-title,
+.page-subtitle {
+	margin: 0;
+}
+
+.page-title {
+	font-size: 3.2rem;
+}
+
+.page-subtitle {
+	font-weight: 300;
+	font-size: 1.8rem;
+}
+
+.page-main {
+	text-align: center;
+}
+
+.picker {
+	margin: 72px 0;
+	outline: none;
+	background: #fff;
+	border: 1px #ede6dc solid;
+	border-radius: 2px;
+	padding: .5em .7em;
+}
+
+.clockpicker-pop,
+.clockpicker-pop button {
+	border-color: #ede6dc;
+}
