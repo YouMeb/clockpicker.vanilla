@@ -946,7 +946,7 @@ Clock.prototype.setValue = function (time) {
 };
 
 Clock.prototype.setHour = function (n) {
-  n = n % 12;
+  n = n % 24;
   updateHand.call(this, this.hourHand, this.hourDial, n);
   return this;
 };
@@ -1108,7 +1108,7 @@ function init() {
   this.handsContainer.appendChild(this.minuteHand.el);
   this.handsContainer.appendChild(this.secondHand.el);
 
-  this.hourDial = new Dial(12);
+  this.hourDial = new Dial(24);
   this.minuteDial = new Dial(60);
   this.secondDial = new Dial(60);
 
