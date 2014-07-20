@@ -1,9 +1,9 @@
 clockpicker.vanilla
 ===================
 
-A vanilla of [weareoutman/clockpicker](https://github.com/weareoutman/clockpicker)
+A vanilla version of [weareoutman/clockpicker](https://github.com/weareoutman/clockpicker).
 
-![screenshot](./screenshot.png)
+![screenshot](https://raw.githubusercontent.com/YouMeb/clockpicker.vanilla/master/screenshot.png)
 
 ## Brower Support
 
