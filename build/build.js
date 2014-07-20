@@ -52,6 +52,55 @@ require.define = function (name, exports) {
     exports: exports
   };
 };
+require.register("poying~transition-duration@master", function (exports, module) {
+'use strict';
+
+var map = {
+  s: 1000
+};
+
+var ms = function (duration) {
+  duration = duration.trim();
+
+  var match = duration.match(/^([\.\d]+)(ms|s)/);
+
+  if (!match) {
+    return 0;
+  }
+
+  return Number(match[1]) * (map[match[2]] | 0);
+};
+
+module.exports = function (el, detail) {
+  var computed = window.getComputedStyle(el);
+  var duration = computed.transitionDuration || '';
+
+  duration = duration
+    .split(',')
+    .map(ms)
+    .sort(function (a, b) {
+      return b - a;
+    });
+
+  if (!detail) {
+    return duration[0] | 0;
+  }
+
+  var transition = {};
+  var property = computed.transitionProperty;
+
+  property
+    .split(',')
+    .forEach(function (name, index) {
+      name = name.trim();
+      transition[name] = duration[index];
+    });
+
+  return transition;
+};
+
+});
+
 require.register("component~emitter@1.1.3", function (exports, module) {
 
 /**
@@ -220,6 +269,47 @@ Emitter.prototype.hasListeners = function(event){
 
 });
 
+require.register("poying~inline-style-auto-prefix@v0.0.0", function (exports, module) {
+'use strict';
+
+var getStyle = window.getComputedStyle;
+var vendorPrefix = getVendorPrefix();
+
+module.exports = function () {
+  return function () {
+    var key = this.key;
+    if (needPrefix(key)) {
+      this.key = vendorPrefix + key[0].toUpperCase() + key.slice(1);
+    }
+  };
+};
+
+function getVendorPrefix() {
+  var prefix;
+
+  if (getStyle) {
+    var style = getStyle(document.documentElement, '');
+    var match;
+    style = Array.prototype.join.call(style, '');
+    match = style.match(/-(?:O|Moz|webkit|ms)-/i);
+    if (match) {
+      prefix = match[0];
+    }
+  }
+
+  return prefix;
+}
+
+function needPrefix(key) {
+  if (getStyle) {
+    var r = new RegExp('^-\\w+-' + (key || ''), 'm');
+    return r.test(Array.prototype.join.call(getStyle(document.body), '\n'));
+  }
+  return false;
+}
+
+});
+
 require.register("poying~inline-style@0.0.4", function (exports, module) {
 'use strict';
 
@@ -340,103 +430,13 @@ proto.toString = function () {
 
 });
 
-require.register("poying~inline-style-auto-prefix@v0.0.0", function (exports, module) {
-'use strict';
-
-var getStyle = window.getComputedStyle;
-var vendorPrefix = getVendorPrefix();
-
-module.exports = function () {
-  return function () {
-    var key = this.key;
-    if (needPrefix(key)) {
-      this.key = vendorPrefix + key[0].toUpperCase() + key.slice(1);
-    }
-  };
-};
-
-function getVendorPrefix() {
-  var prefix;
-
-  if (getStyle) {
-    var style = getStyle(document.documentElement, '');
-    var match;
-    style = Array.prototype.join.call(style, '');
-    match = style.match(/-(?:O|Moz|webkit|ms)-/i);
-    if (match) {
-      prefix = match[0];
-    }
-  }
-
-  return prefix;
-}
-
-function needPrefix(key) {
-  if (getStyle) {
-    var r = new RegExp('^-\\w+-' + (key || ''), 'm');
-    return r.test(Array.prototype.join.call(getStyle(document.body), '\n'));
-  }
-  return false;
-}
-
-});
-
-require.register("poying~transition-duration@master", function (exports, module) {
-'use strict';
-
-var map = {
-  s: 1000
-};
-
-var ms = function (duration) {
-  duration = duration.trim();
-
-  var match = duration.match(/^([\.\d]+)(ms|s)/);
-
-  if (!match) {
-    return 0;
-  }
-
-  return Number(match[1]) * (map[match[2]] | 0);
-};
-
-module.exports = function (el, detail) {
-  var computed = window.getComputedStyle(el);
-  var duration = computed.transitionDuration || '';
-
-  duration = duration
-    .split(',')
-    .map(ms)
-    .sort(function (a, b) {
-      return b - a;
-    });
-
-  if (!detail) {
-    return duration[0] | 0;
-  }
-
-  var transition = {};
-  var property = computed.transitionProperty;
-
-  property
-    .split(',')
-    .forEach(function (name, index) {
-      name = name.trim();
-      transition[name] = duration[index];
-    });
-
-  return transition;
-};
-
-});
-
-require.register("youmeb~clockpicker.vanilla@0.0.2", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var defaultOptions = require("youmeb~clockpicker.vanilla@0.0.2/lib/default-options.js");
-var Clock = require("youmeb~clockpicker.vanilla@0.0.2/lib/clock.js");
-var Pop = require("youmeb~clockpicker.vanilla@0.0.2/lib/pop.js");
+var defaultOptions = require("youmeb~clockpicker.vanilla@0.0.3/lib/default-options.js");
+var Clock = require("youmeb~clockpicker.vanilla@0.0.3/lib/clock.js");
+var Pop = require("youmeb~clockpicker.vanilla@0.0.3/lib/pop.js");
 
 module.exports = Clockpicker;
 
@@ -558,7 +558,7 @@ function updateClock() {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/create-svg-element.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/create-svg-element.js", function (exports, module) {
 'use strict';
 
 module.exports = function (tag) {
@@ -567,7 +567,7 @@ module.exports = function (tag) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/default-options.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/default-options.js", function (exports, module) {
 'use strict';
 
 var defaultOptions = {
@@ -595,12 +595,12 @@ module.exports = function (options) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/dial.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/dial.js", function (exports, module) {
 'use strict';
 
-var Point = require("youmeb~clockpicker.vanilla@0.0.2/lib/point.js");
-var Tick = require("youmeb~clockpicker.vanilla@0.0.2/lib/tick.js");
-var animate = require("youmeb~clockpicker.vanilla@0.0.2/lib/animate.js");
+var Point = require("youmeb~clockpicker.vanilla@0.0.3/lib/point.js");
+var Tick = require("youmeb~clockpicker.vanilla@0.0.3/lib/tick.js");
+var animate = require("youmeb~clockpicker.vanilla@0.0.3/lib/animate.js");
 
 module.exports = Dial;
 
@@ -699,11 +699,11 @@ Dial.prototype.moveTo = function (tick, emit) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/hand.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/hand.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.2/lib/create-svg-element.js");
+var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.3/lib/create-svg-element.js");
 
 module.exports = Hand;
 
@@ -762,7 +762,7 @@ function setPoint(n, point) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/point.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/point.js", function (exports, module) {
 'use strict';
 
 module.exports = Point;
@@ -804,11 +804,11 @@ Point.prototype.distToSegmentSquared = function (p1, p2) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/pop.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/pop.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var animate = require("youmeb~clockpicker.vanilla@0.0.2/lib/animate.js");
+var animate = require("youmeb~clockpicker.vanilla@0.0.3/lib/animate.js");
 
 module.exports = Pop;
 
@@ -849,7 +849,7 @@ function stop(e) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/tick.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/tick.js", function (exports, module) {
 'use strict';
 
 var inlineStyle = require("poying~inline-style@0.0.4");
@@ -896,16 +896,16 @@ Tick.prototype.size = function () {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/clock.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/clock.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
 var inlineStyle = require("poying~inline-style@0.0.4");
 var autoprefix = require("poying~inline-style-auto-prefix@v0.0.0");
-var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.2/lib/create-svg-element.js");
-var Dial = require("youmeb~clockpicker.vanilla@0.0.2/lib/dial.js");
-var Hand = require("youmeb~clockpicker.vanilla@0.0.2/lib/hand.js");
-var Point = require("youmeb~clockpicker.vanilla@0.0.2/lib/point.js");
+var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.3/lib/create-svg-element.js");
+var Dial = require("youmeb~clockpicker.vanilla@0.0.3/lib/dial.js");
+var Hand = require("youmeb~clockpicker.vanilla@0.0.3/lib/hand.js");
+var Point = require("youmeb~clockpicker.vanilla@0.0.3/lib/point.js");
 
 module.exports = Clock;
 
@@ -943,7 +943,7 @@ Clock.prototype.setValue = function (time) {
 };
 
 Clock.prototype.setHour = function (n) {
-  n = n % 12;
+  n = n % 24;
   updateHand.call(this, this.hourHand, this.hourDial, n);
   return this;
 };
@@ -1105,7 +1105,7 @@ function init() {
   this.handsContainer.appendChild(this.minuteHand.el);
   this.handsContainer.appendChild(this.secondHand.el);
 
-  this.hourDial = new Dial(12);
+  this.hourDial = new Dial(24);
   this.minuteDial = new Dial(60);
   this.secondDial = new Dial(60);
 
@@ -1197,7 +1197,7 @@ function getPointFromMouseEvent(e) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.2/lib/animate.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.3/lib/animate.js", function (exports, module) {
 'use strict';
 
 var duration = require("poying~transition-duration@master");
@@ -1271,7 +1271,7 @@ require.register("clockpicker.vanilla.demo", function (exports, module) {
 'use strict';
 
 var container = document.querySelector('.page-main');
-var Clockpicker = require("youmeb~clockpicker.vanilla@0.0.2");
+var Clockpicker = require("youmeb~clockpicker.vanilla@0.0.3");
 var picker = new Clockpicker();
 
 picker.el.classList.add('picker');
