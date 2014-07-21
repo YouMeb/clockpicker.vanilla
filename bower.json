@@ -1,0 +1,25 @@
+{
+  "name": "clockpicker.vanilla",
+  "version": "0.0.4",
+  "homepage": "http://youmeb.github.io/clockpicker.vanilla",
+  "authors": [
+    "Po-Ying Chen <poying.me@gmail.com>"
+  ],
+  "main": "build/build.js",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "clockpicker"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ]
+}
