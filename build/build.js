@@ -101,6 +101,47 @@ module.exports = function (el, detail) {
 
 });
 
+require.register("poying~inline-style-auto-prefix@v0.0.0", function (exports, module) {
+'use strict';
+
+var getStyle = window.getComputedStyle;
+var vendorPrefix = getVendorPrefix();
+
+module.exports = function () {
+  return function () {
+    var key = this.key;
+    if (needPrefix(key)) {
+      this.key = vendorPrefix + key[0].toUpperCase() + key.slice(1);
+    }
+  };
+};
+
+function getVendorPrefix() {
+  var prefix;
+
+  if (getStyle) {
+    var style = getStyle(document.documentElement, '');
+    var match;
+    style = Array.prototype.join.call(style, '');
+    match = style.match(/-(?:O|Moz|webkit|ms)-/i);
+    if (match) {
+      prefix = match[0];
+    }
+  }
+
+  return prefix;
+}
+
+function needPrefix(key) {
+  if (getStyle) {
+    var r = new RegExp('^-\\w+-' + (key || ''), 'm');
+    return r.test(Array.prototype.join.call(getStyle(document.body), '\n'));
+  }
+  return false;
+}
+
+});
+
 require.register("component~emitter@1.1.3", function (exports, module) {
 
 /**
@@ -269,47 +310,6 @@ Emitter.prototype.hasListeners = function(event){
 
 });
 
-require.register("poying~inline-style-auto-prefix@v0.0.0", function (exports, module) {
-'use strict';
-
-var getStyle = window.getComputedStyle;
-var vendorPrefix = getVendorPrefix();
-
-module.exports = function () {
-  return function () {
-    var key = this.key;
-    if (needPrefix(key)) {
-      this.key = vendorPrefix + key[0].toUpperCase() + key.slice(1);
-    }
-  };
-};
-
-function getVendorPrefix() {
-  var prefix;
-
-  if (getStyle) {
-    var style = getStyle(document.documentElement, '');
-    var match;
-    style = Array.prototype.join.call(style, '');
-    match = style.match(/-(?:O|Moz|webkit|ms)-/i);
-    if (match) {
-      prefix = match[0];
-    }
-  }
-
-  return prefix;
-}
-
-function needPrefix(key) {
-  if (getStyle) {
-    var r = new RegExp('^-\\w+-' + (key || ''), 'm');
-    return r.test(Array.prototype.join.call(getStyle(document.body), '\n'));
-  }
-  return false;
-}
-
-});
-
 require.register("poying~inline-style@0.0.4", function (exports, module) {
 'use strict';
 
@@ -430,13 +430,13 @@ proto.toString = function () {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var defaultOptions = require("youmeb~clockpicker.vanilla@0.0.3/lib/default-options.js");
-var Clock = require("youmeb~clockpicker.vanilla@0.0.3/lib/clock.js");
-var Pop = require("youmeb~clockpicker.vanilla@0.0.3/lib/pop.js");
+var defaultOptions = require("youmeb~clockpicker.vanilla@0.0.4/lib/default-options.js");
+var Clock = require("youmeb~clockpicker.vanilla@0.0.4/lib/clock.js");
+var Pop = require("youmeb~clockpicker.vanilla@0.0.4/lib/pop.js");
 
 module.exports = Clockpicker;
 
@@ -468,16 +468,30 @@ Clockpicker.prototype.show = function (cb) {
   var height = popRect.bottom - popRect.top;
   var helfWidth = width / 2;
 
+  var scrollY = (window.pageYOffset !== undefined)
+    ? window.pageYOffset
+    : (document.documentElement
+        || document.body.parentNode
+        || document.body)
+    .scrollTop;
+
+  var scrollX = (window.pageXOffset !== undefined)
+    ? window.pageXOffset
+    : (document.documentElement
+        || document.body.parentNode
+        || document.body)
+    .scrollLeft;
+
   var pos = {
-    top: rect.top,
-    left: rect.left
+    top: rect.top + scrollY,
+    left: rect.left + scrollX
   };
 
   pos.top += rect.bottom - rect.top + 24;
   pos.left -= helfWidth - (rect.right - rect.left) / 2;
 
-  if (pos.top > window.screen.height / 2) {
-    pos.top -= 48 + height;
+  if (pos.top > scrollY + window.screen.height / 2) {
+    pos.top -= 72 + height;
   }
 
   if (pos.left < 0) {
@@ -558,7 +572,7 @@ function updateClock() {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/create-svg-element.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/create-svg-element.js", function (exports, module) {
 'use strict';
 
 module.exports = function (tag) {
@@ -567,7 +581,7 @@ module.exports = function (tag) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/default-options.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/default-options.js", function (exports, module) {
 'use strict';
 
 var defaultOptions = {
@@ -595,12 +609,12 @@ module.exports = function (options) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/dial.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/dial.js", function (exports, module) {
 'use strict';
 
-var Point = require("youmeb~clockpicker.vanilla@0.0.3/lib/point.js");
-var Tick = require("youmeb~clockpicker.vanilla@0.0.3/lib/tick.js");
-var animate = require("youmeb~clockpicker.vanilla@0.0.3/lib/animate.js");
+var Point = require("youmeb~clockpicker.vanilla@0.0.4/lib/point.js");
+var Tick = require("youmeb~clockpicker.vanilla@0.0.4/lib/tick.js");
+var animate = require("youmeb~clockpicker.vanilla@0.0.4/lib/animate.js");
 
 module.exports = Dial;
 
@@ -699,11 +713,11 @@ Dial.prototype.moveTo = function (tick, emit) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/hand.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/hand.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.3/lib/create-svg-element.js");
+var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.4/lib/create-svg-element.js");
 
 module.exports = Hand;
 
@@ -762,7 +776,7 @@ function setPoint(n, point) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/point.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/point.js", function (exports, module) {
 'use strict';
 
 module.exports = Point;
@@ -804,11 +818,11 @@ Point.prototype.distToSegmentSquared = function (p1, p2) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/pop.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/pop.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
-var animate = require("youmeb~clockpicker.vanilla@0.0.3/lib/animate.js");
+var animate = require("youmeb~clockpicker.vanilla@0.0.4/lib/animate.js");
 
 module.exports = Pop;
 
@@ -849,7 +863,7 @@ function stop(e) {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/tick.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/tick.js", function (exports, module) {
 'use strict';
 
 var inlineStyle = require("poying~inline-style@0.0.4");
@@ -896,16 +910,16 @@ Tick.prototype.size = function () {
 
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/clock.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/clock.js", function (exports, module) {
 'use strict';
 
 var Emitter = require("component~emitter@1.1.3");
 var inlineStyle = require("poying~inline-style@0.0.4");
 var autoprefix = require("poying~inline-style-auto-prefix@v0.0.0");
-var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.3/lib/create-svg-element.js");
-var Dial = require("youmeb~clockpicker.vanilla@0.0.3/lib/dial.js");
-var Hand = require("youmeb~clockpicker.vanilla@0.0.3/lib/hand.js");
-var Point = require("youmeb~clockpicker.vanilla@0.0.3/lib/point.js");
+var createSvgElement = require("youmeb~clockpicker.vanilla@0.0.4/lib/create-svg-element.js");
+var Dial = require("youmeb~clockpicker.vanilla@0.0.4/lib/dial.js");
+var Hand = require("youmeb~clockpicker.vanilla@0.0.4/lib/hand.js");
+var Point = require("youmeb~clockpicker.vanilla@0.0.4/lib/point.js");
 
 module.exports = Clock;
 
@@ -1130,6 +1144,9 @@ function bind() {
   this.el.addEventListener('mousedown', this.onMousedown.bind(this));
   this.el.addEventListener('mouseup', this.onMouseup.bind(this));
   this.el.addEventListener('mousemove', this.onMousemove.bind(this));
+  this.el.addEventListener('touchstart', touch(this.onMousedown.bind(this)));
+  this.el.addEventListener('touchend', touch(this.onMouseup.bind(this)));
+  this.el.addEventListener('touchmove', touch(this.onMousemove.bind(this)));
   bindHand.call(this, this.hourHand, this.hourDial);
   bindHand.call(this, this.minuteHand, this.minuteDial);
   bindHand.call(this, this.secondHand, this.secondDial);
@@ -1195,9 +1212,15 @@ function getPointFromMouseEvent(e) {
   return point;
 }
 
+function touch(fn) {
+  return function (e) {
+    fn(e.touches[0]);
+  };
+}
+
 });
 
-require.register("youmeb~clockpicker.vanilla@0.0.3/lib/animate.js", function (exports, module) {
+require.register("youmeb~clockpicker.vanilla@0.0.4/lib/animate.js", function (exports, module) {
 'use strict';
 
 var duration = require("poying~transition-duration@master");
@@ -1271,7 +1294,7 @@ require.register("clockpicker.vanilla.demo", function (exports, module) {
 'use strict';
 
 var container = document.querySelector('.page-main');
-var Clockpicker = require("youmeb~clockpicker.vanilla@0.0.3");
+var Clockpicker = require("youmeb~clockpicker.vanilla@0.0.4");
 var picker = new Clockpicker();
 
 picker.el.classList.add('picker');
