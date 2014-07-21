@@ -489,7 +489,6 @@ Clockpicker.prototype.show = function (cb) {
     top: rect.top + scrollY,
     left: rect.left + scrollX
   };
-  console.log(pos.top, scrollY + window.screen.height / 2, rect.top);
 
   pos.top += rect.bottom - rect.top + 24;
   pos.left -= helfWidth - (rect.right - rect.left) / 2;
@@ -1148,6 +1147,9 @@ function bind() {
   this.el.addEventListener('mousedown', this.onMousedown.bind(this));
   this.el.addEventListener('mouseup', this.onMouseup.bind(this));
   this.el.addEventListener('mousemove', this.onMousemove.bind(this));
+  this.el.addEventListener('touchstart', touch(this.onMousedown.bind(this)));
+  this.el.addEventListener('touchend', touch(this.onMouseup.bind(this)));
+  this.el.addEventListener('touchmove', touch(this.onMousemove.bind(this)));
   bindHand.call(this, this.hourHand, this.hourDial);
   bindHand.call(this, this.minuteHand, this.minuteDial);
   bindHand.call(this, this.secondHand, this.secondDial);
@@ -1211,6 +1213,12 @@ function getPointFromMouseEvent(e) {
   );
 
   return point;
+}
+
+function touch(fn) {
+  return function (e) {
+    fn(e.touches[0]);
+  };
 }
 
 });
